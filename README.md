@@ -1,3 +1,3 @@
 # Beryllium
 
-A description of this package.
+A light framework and utility collection for app development with SwiftUI.
