@@ -1,3 +1,3 @@
 # Beryllium
-
-A light framework and utility collection for app development with SwiftUI.
+=======
+A collection of tools for Berilio's app development.
