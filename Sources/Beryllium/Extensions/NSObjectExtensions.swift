@@ -7,11 +7,5 @@
 
 import Foundation
 
-extension NSObjectProtocol {
-    
-    @discardableResult
-    public func configure(_ block: ((Self) -> Void)) -> Self {
-        block(self)
-        return self
-    }
+extension NSObject: Configurable {
 }
