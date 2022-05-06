@@ -16,7 +16,7 @@ import Foundation
     }
     
     public var projectedValue: AnyPublisher<T, Never> {
-        valueSubject.eraseToAnyPublisher()
+        valueSubject.receive(on: DispatchQueue.main).eraseToAnyPublisher()
     }
     
     private let valueSubject: CurrentValueSubject<T, Never>

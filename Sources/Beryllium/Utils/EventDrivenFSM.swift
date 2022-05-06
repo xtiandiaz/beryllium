@@ -9,6 +9,7 @@ import Foundation
 
 public final class EventDrivenFSM<S: Hashable, E: Hashable>: Runnable, Configurable {
     
+    public private(set) var state: S?
     public private(set) var isRunning = false
     
     public init(initialState: S) {
@@ -69,7 +70,6 @@ public final class EventDrivenFSM<S: Hashable, E: Hashable>: Runnable, Configura
     // MARK: - Private
     
     private let initialState: S
-    private var state: S?
     
     private var stateWrappers = [S: StateWrapper<S, E>]()
     
