@@ -13,8 +13,11 @@ extension UISwipeGestureRecognizer.Direction: Hashable {
     public var hashValue: Int {
         Int(rawValue)
     }
+}
+
+extension UISwipeGestureRecognizer.Direction {
     
-    public static func fromPoint(_ startPoint: CGPoint, to endPoint: CGPoint) -> Self {
+    public static func fromPoint(_ startPoint: CGPoint, toward endPoint: CGPoint) -> Self {
         let offset = CGSize(width: endPoint.x - startPoint.x, height: endPoint.y - startPoint.y)
         
         if abs(offset.width) > abs(offset.height) {

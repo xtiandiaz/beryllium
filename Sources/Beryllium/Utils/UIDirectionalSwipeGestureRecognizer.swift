@@ -5,16 +5,16 @@
 //  Created by Cristian Diaz on 3.6.2022.
 //
 
-import SpriteKit
+import UIKit
 
 public final class UIDirectionalSwipeGestureRecognizer: UIPanGestureRecognizer {
     
-    public var swipeDirection: UISwipeGestureRecognizer.Direction?
+    public private(set) var direction: UISwipeGestureRecognizer.Direction?
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesBegan(touches, with: event)
         
-        swipeDirection = nil
+        direction = nil
         
         if let touch = touches.first {
             startTimestamp = touch.timestamp
@@ -28,7 +28,7 @@ public final class UIDirectionalSwipeGestureRecognizer: UIPanGestureRecognizer {
         if
             let currentTimestamp = touches.first?.timestamp,
             let startTimestamp = startTimestamp,
-            currentTimestamp - startTimestamp > 0.35
+            currentTimestamp - startTimestamp > 0.3
         {
             touchesCancelled(touches, with: event)
         }
@@ -42,7 +42,7 @@ public final class UIDirectionalSwipeGestureRecognizer: UIPanGestureRecognizer {
             let startLocation = startLocation,
             startLocation.distance(to: endLocation) > 20
         {
-            swipeDirection = UISwipeGestureRecognizer.Direction.fromPoint(startLocation, to: endLocation)
+            direction = UISwipeGestureRecognizer.Direction.fromPoint(startLocation, toward: endLocation)
         }
     }
     
