@@ -42,14 +42,6 @@ public struct Stack<Element>: Collection {
         return nil
     }
     
-    public mutating func remove(at index: Index) -> Element {
-        items.remove(at: index)
-    }
-    
-    public mutating func removeAll(where shouldBeRemoved: (Element) -> Bool) {
-        items.removeAll(where: shouldBeRemoved)
-    }
-    
     public func index(after i: Index) -> Index {
         items.reversed().index(after: i)
     }
@@ -57,4 +49,19 @@ public struct Stack<Element>: Collection {
     // MARK: - Private
     
     private var items = [Element]()
+}
+
+extension Stack {
+    
+    public mutating func insert(_ item: Element, at index: Index) {
+        items.insert(item, at: index)
+    }
+    
+    public mutating func remove(at index: Index) -> Element {
+        items.remove(at: index)
+    }
+    
+    public mutating func removeAll(where shouldBeRemoved: (Element) -> Bool) {
+        items.removeAll(where: shouldBeRemoved)
+    }
 }
