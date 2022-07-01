@@ -9,7 +9,11 @@ import Foundation
 
 extension Task where Success == Never, Failure == Never {
     
-    public static func sleep(seconds: TimeInterval) async throws {
-        try await sleep(nanoseconds: seconds.toNanoseconds())
+    public static func sleep(seconds: TimeInterval) async {
+        do {
+            try await sleep(nanoseconds: seconds.toNanoseconds())
+        } catch {
+            fatalError(error.localizedDescription)
+        }
     }
 }
