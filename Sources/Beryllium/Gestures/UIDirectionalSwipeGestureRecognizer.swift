@@ -1,6 +1,6 @@
 //
 //  UIDirectionalSwipeGestureRecognizer.swift
-//  Emerald
+//  Beryllium
 //
 //  Created by Cristian Diaz on 3.6.2022.
 //
