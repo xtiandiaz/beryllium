@@ -7,61 +7,59 @@
 
 import Foundation
 
-public struct Stack<Element>: Collection {
+public struct Stack<Element>: Collection, ArrayProtocol {
     
-    public typealias Index = Array<Element>.Index
+    public typealias Index = BaseCollection.Index
+    
+    public private(set) var baseCollection = [Element]()
     
     public var startIndex: Index {
-        items.reversed().startIndex
+        baseCollection.reversed().startIndex
     }
     
     public var endIndex: Index {
-        items.reversed().endIndex
+        baseCollection.reversed().endIndex
     }
     
     public init() {
     }
     
     public subscript(index: Index) -> Element {
-        items.reversed()[index]
+        baseCollection.reversed()[index]
     }
     
     public func peek() -> Element? {
-        items.last
+        baseCollection.last
     }
     
     public mutating func push(_ element: Element) {
-        items.append(element)
+        baseCollection.append(element)
     }
     
     public mutating func pop() -> Element? {
         if !isEmpty {
-            return items.removeLast()
+            return baseCollection.removeLast()
         }
         
         return nil
     }
     
     public func index(after i: Index) -> Index {
-        items.reversed().index(after: i)
+        baseCollection.reversed().index(after: i)
     }
-    
-    // MARK: - Private
-    
-    private var items = [Element]()
 }
 
 extension Stack {
     
     public mutating func insert(_ item: Element, at index: Index) {
-        items.insert(item, at: index)
+        baseCollection.insert(item, at: index)
     }
     
     public mutating func remove(at index: Index) -> Element {
-        items.remove(at: index)
+        baseCollection.remove(at: index)
     }
     
     public mutating func removeAll(where shouldBeRemoved: (Element) -> Bool) {
-        items.removeAll(where: shouldBeRemoved)
+        baseCollection.removeAll(where: shouldBeRemoved)
     }
 }
