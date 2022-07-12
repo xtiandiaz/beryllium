@@ -47,3 +47,10 @@ extension Queue {
         baseCollection.removeAll(where: shouldBeRemoved)
     }
 }
+
+extension Queue where Element: Equatable {
+    
+    public mutating func remove(_ item: Element) -> Element? {
+        baseCollection.remove(item)
+    }
+}

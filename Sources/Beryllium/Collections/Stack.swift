@@ -63,3 +63,10 @@ extension Stack {
         baseCollection.removeAll(where: shouldBeRemoved)
     }
 }
+
+extension Stack where Element: Equatable {
+    
+    public mutating func remove(_ item: Element) -> Element? {
+        baseCollection.remove(item)
+    }
+}
