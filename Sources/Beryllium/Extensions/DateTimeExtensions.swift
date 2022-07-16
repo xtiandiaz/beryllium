@@ -9,7 +9,7 @@ import Foundation
 
 extension TimeInterval {
     
-    func toNanoseconds() -> UInt64 {
+    public func toNanoseconds() -> UInt64 {
         UInt64(self * 1_000_000_000)
     }
 }
