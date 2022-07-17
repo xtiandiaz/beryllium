@@ -8,12 +8,38 @@
 import CoreGraphics
 import simd.vector_types
 
-public func abs(_ point: CGPoint) -> CGPoint {
-    CGPoint(x: abs(point.x), y: abs(point.y))
+extension CGFloat {
+    
+    /// 4pt
+    public static let xs: CGFloat = 4
+    /// 8pt
+    public static let s: CGFloat = 8
+    /// 16pt
+    public static let ms: CGFloat = 16
+    /// 24pt
+    public static let m: CGFloat = 24
+    /// 28pt
+    public static let ml: CGFloat = 28
+    /// 32pt
+    public static let l: CGFloat = 32
+    /// 48pt
+    public static let xl: CGFloat = 48
+    /// 64pt
+    public static let xxl: CGFloat = 64
+    
+    public static func * (lhs: Int, rhs: CGFloat) -> CGFloat {
+        CGFloat(lhs) * rhs
+    }
+    
+    public static func * (lhs: CGFloat, rhs: Int) -> CGFloat {
+        lhs * CGFloat(rhs)
+    }
 }
 
-public func abs(_ size: CGSize) -> CGSize {
-    CGSize(width: abs(size.width), height: abs(size.height))
+public typealias Vector = CGPoint
+
+public func abs(_ point: CGPoint) -> CGPoint {
+    CGPoint(x: abs(point.x), y: abs(point.y))
 }
 
 extension CGPoint {
@@ -108,8 +134,19 @@ extension CGPoint {
         sqrt(distanceSquared(to: to))
     }
     
+    public func vectorNormalized(toward target: CGPoint) -> Vector {
+        let vector = vector(toward: target)
+        let max = max(abs(vector.x), abs(vector.y))
+        
+        return max == 0 ? .zero : Vector(x: vector.x / max, y: vector.y / max)
+    }
+    
+    public func vector(toward target: CGPoint) -> Vector {
+        Vector(x: target.x - x, y: target.y - y)
+    }
+    
     public func direction(toward target: CGPoint) -> Direction? {
-        let vector  = CGPoint(x: target.x - x, y: target.y - y)
+        let vector  = Vector(x: target.x - x, y: target.y - y)
         
         guard vector != .zero else {
             return nil
@@ -121,6 +158,12 @@ extension CGPoint {
             ? vector.x > 0 ? .right : .left
             : vector.y > 0 ? .up : .down
     }
+}
+
+public typealias Offset = CGSize
+
+public func abs(_ size: CGSize) -> CGSize {
+    CGSize(width: abs(size.width), height: abs(size.height))
 }
 
 extension CGSize {

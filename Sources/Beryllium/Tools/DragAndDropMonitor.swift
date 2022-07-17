@@ -1,5 +1,5 @@
 //
-//  DragMonitor.swift
+//  DragAndDropMonitor.swift
 //  Beryllium
 //
 //  Created by Cristian Diaz on 15.7.2022.
@@ -8,15 +8,13 @@
 import Foundation
 import SwiftUI
 
-public final class DragMonitor: ObservableObject, Configurable {
+public final class DragAndDropMonitor: ObservableObject, Configurable {
     
-    @Published public private(set) var accumulatedTranslation: CGSize = .zero
+    @Published public private(set) var dragOffset: Offset = .zero
     
-    public var shouldPublishTranslation = true
-    
-    public var onStarted: (() -> Void)?
-    public var onEnded: ((CGSize) -> Void)?
-    public var onSwipe: ((Direction) -> Void)?
+    public var onPicked: (() -> Void)?
+    public var onDropped: ((Offset) -> Void)?
+    public var onSwiped: ((Direction, Offset) -> Void)?
     
     public init(minAbsSpeedForSwipe: CGFloat = 20) {
         self.minAbsSpeedForSwipe = minAbsSpeedForSwipe
@@ -35,29 +33,25 @@ public final class DragMonitor: ObservableObject, Configurable {
     private let minAbsSpeedForSwipe: CGFloat
     
     private var startTime: Date?
-    private var previousValue: DragGesture.Value?
     
     private func update(with value: DragGesture.Value) {
         if startTime.isNil {
             startTime = value.time
             
-            onStarted?()
+            onPicked?()
         }
         
-        if shouldPublishTranslation {
-            accumulatedTranslation = value.translation
-        }
+        dragOffset = value.translation
     }
     
     private func end(with value: DragGesture.Value) {
         defer {
             startTime = nil
-            
-            onEnded?(accumulatedTranslation)
-            accumulatedTranslation = .zero
+            dragOffset = .zero
         }
         
-        guard let onSwipe = onSwipe else {
+        guard let onSwipe = onSwiped else {
+            onDropped?(dragOffset)
             return
         }
         
@@ -76,7 +70,9 @@ public final class DragMonitor: ObservableObject, Configurable {
         }
         
         if let swipeDirection = swipeDirection {
-            onSwipe(swipeDirection)
+            onSwipe(swipeDirection, dragOffset)
+        } else {
+            onDropped?(dragOffset)
         }
     }
 }
