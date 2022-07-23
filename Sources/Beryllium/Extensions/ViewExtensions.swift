@@ -28,4 +28,17 @@ extension View {
             self
         }
     }
+    
+    @ViewBuilder
+    public func `if`<ContentIf: View, ContentElse: View>(
+        _ condition: Bool,
+        apply: (Self) -> ContentIf,
+        else elseApply: (Self) -> ContentElse
+    ) -> some View {
+        if condition {
+            apply(self)
+        } else {
+            elseApply(self)
+        }
+    }
 }

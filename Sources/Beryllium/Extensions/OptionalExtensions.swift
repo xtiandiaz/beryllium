@@ -7,9 +7,16 @@
 
 import Foundation
 
-public extension Optional {
+extension Optional {
     
-    var isNil: Bool {
+    public var isNil: Bool {
         self == nil
+    }
+}
+
+extension Optional where Wrapped == String {
+    
+    public var isNilOrEmpty: Bool {
+        isNil || self!.isEmpty
     }
 }
