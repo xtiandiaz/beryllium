@@ -10,6 +10,8 @@ import SwiftUI
 
 extension EdgeInsets {
     
+    public static var zero = EdgeInsets(horizontal: 0, vertical: 0)
+    
     public var horizontal: EdgeInsets {
         .init(top: 0, leading: leading, bottom: 0, trailing: trailing)
     }
