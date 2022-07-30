@@ -8,7 +8,8 @@
 import Combine
 import Foundation
 
-@propertyWrapper public class Publish<T> {
+@propertyWrapper
+public class Publish<T> {
     
     public var wrappedValue: T {
         get { valueSubject.value }
@@ -19,9 +20,11 @@ import Foundation
         valueSubject.receive(on: DispatchQueue.main).eraseToAnyPublisher()
     }
     
-    private let valueSubject: CurrentValueSubject<T, Never>
-    
     public init(wrappedValue: T) {
         valueSubject = CurrentValueSubject<T, Never>(wrappedValue)
     }
+    
+    // MARK: - Private
+    
+    private let valueSubject: CurrentValueSubject<T, Never>
 }
