@@ -8,19 +8,21 @@
 import Foundation
 import SwiftUI
 
-public struct AnchorPreferenceValue: Identifiable, Equatable {
+public struct AnchorPreferenceValue<ID: Hashable>: Identifiable, Equatable {
     
-    public let id: UUID
+    public let id: ID
     public let anchor: Anchor<CGRect>
 }
 
-public struct AnchorPreferenceKey: PreferenceKey {
+public struct AnchorPreferenceKey<ID: Hashable>: PreferenceKey {
     
-    public static var defaultValue: [AnchorPreferenceValue] = []
+    public static var defaultValue: [AnchorPreferenceValue<ID>] {
+        []
+    }
     
     public static func reduce(
-        value: inout [AnchorPreferenceValue],
-        nextValue: () -> [AnchorPreferenceValue]
+        value: inout [AnchorPreferenceValue<ID>],
+        nextValue: () -> [AnchorPreferenceValue<ID>]
     ) {
         value.append(contentsOf: nextValue())
     }
