@@ -14,8 +14,8 @@ extension View {
         zIndex(Double(value))
     }
     
-    public func anchorPreference(id: UUID, value: Anchor<CGRect>.Source) -> some View {
-        self.anchorPreference(key: AnchorPreferenceKey.self, value: value) {
+    public func anchorPreference<ID: Hashable>(id: ID, value: Anchor<CGRect>.Source) -> some View {
+        self.anchorPreference(key: AnchorPreferenceKey<ID>.self, value: value) {
             [AnchorPreferenceValue(id: id, anchor: $0)]
         }
     }
