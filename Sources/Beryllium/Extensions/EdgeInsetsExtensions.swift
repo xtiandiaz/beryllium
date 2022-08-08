@@ -36,6 +36,10 @@ extension EdgeInsets {
         self.init(top: vertical, leading: leading, bottom: vertical, trailing: trailing)
     }
     
+    public init(leading: CGFloat, trailing: CGFloat) {
+        self.init(top: 0, leading: leading, bottom: 0, trailing: trailing)
+    }
+    
     public init(top: CGFloat) {
         self.init(top: top, leading: 0, bottom: 0, trailing: 0)
     }
