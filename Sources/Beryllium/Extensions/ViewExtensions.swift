@@ -20,8 +20,10 @@ extension View {
         }
     }
     
-    @ViewBuilder
-    public func `if`<Content: View>(_ condition: Bool, apply: (Self) -> Content) -> some View {
+    @ViewBuilder public func `if`<Content: View>(
+        _ condition: Bool,
+        apply: (Self) -> Content
+    ) -> some View {
         if condition {
             apply(self)
         } else {
@@ -29,8 +31,7 @@ extension View {
         }
     }
     
-    @ViewBuilder
-    public func `if`<ContentIf: View, ContentElse: View>(
+    @ViewBuilder public func `if`<ContentIf: View, ContentElse: View>(
         _ condition: Bool,
         apply: (Self) -> ContentIf,
         else elseApply: (Self) -> ContentElse
