@@ -25,6 +25,10 @@ extension Int {
 
 extension Double {
     
+    public func lerp(to: Double, at t: Double) -> Double {
+        self + (to - self) * t
+    }
+    
     public static func * (lhs: Int, rhs: Double) -> Double {
         Double(lhs) * rhs
     }
