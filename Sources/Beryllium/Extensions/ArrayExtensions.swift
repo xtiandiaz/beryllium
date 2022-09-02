@@ -20,4 +20,10 @@ extension Array {
     public func isValid(index: Int) -> Bool {
         index >= 0 && index < count
     }
+    
+    public func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>) -> [Element] {
+        sorted {
+            $0[keyPath: keyPath] > $1[keyPath: keyPath]
+        }
+    }
 }
