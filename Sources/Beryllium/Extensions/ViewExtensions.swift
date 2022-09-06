@@ -91,4 +91,12 @@ extension View {
             withoutApply(self)
         }
     }
+    
+    @ViewBuilder public func hidden(_ condition: Bool) -> some View {
+        if condition {
+            self.hidden()
+        } else {
+            self
+        }
+    }
 }
