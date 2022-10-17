@@ -93,7 +93,7 @@ extension CGPoint {
     }
     
     public func points(count: Int, offset: CGSize) -> [CGPoint] {
-        (0..<count).map { [offsetPoint = offset.asPoint()] in
+        (0..<count).map { [offsetPoint = offset.point()] in
             CGPoint(x: x + offsetPoint.x * $0, y: y + offsetPoint.y * $0)
         }
     }
@@ -118,7 +118,7 @@ extension CGPoint {
         lhs * CGFloat(rhs)
     }
     
-    public func asOffset() -> CGSize {
+    public func offset() -> CGSize {
         CGSize(width: x, height: y)
     }
     
@@ -185,11 +185,11 @@ extension CGSize {
     }
     
     public var magnitude: CGFloat {
-        asPoint().distance(to: .zero)
+        point().distance(to: .zero)
     }
     
     public var magnitudeSquared: CGFloat {
-        asPoint().distanceSquared(to: .zero)
+        point().distanceSquared(to: .zero)
     }
     
     public init(length: CGFloat) {
@@ -224,7 +224,7 @@ extension CGSize {
         CGSize(width: lhs.width / rhs, height: lhs.height / rhs)
     }
     
-    public func asPoint() -> CGPoint {
+    public func point() -> CGPoint {
         CGPoint(x: width, y: height)
     }
 }
