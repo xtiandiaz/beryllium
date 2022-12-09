@@ -7,6 +7,10 @@
 
 import Foundation
 
+public func clamp<T: Comparable>(_ value: T, min minValue: T, max maxValue: T) -> T {
+    min(max(value, minValue), maxValue)
+}
+
 public func with<T>(_ object: T?, _ closure: (T) -> Void) {
     if let object = object {
         closure(object)

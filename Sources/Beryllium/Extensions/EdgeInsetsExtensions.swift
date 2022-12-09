@@ -20,6 +20,10 @@ extension EdgeInsets {
         .init(top: top, leading: 0, bottom: bottom, trailing: 0)
     }
     
+    public var uiEdgeInsets: UIEdgeInsets {
+        .init(top: top, left: leading, bottom: bottom, right: trailing)
+    }
+    
     public init(_ all: CGFloat) {
         self.init(horizontal: all, vertical: all)
     }
@@ -28,7 +32,7 @@ extension EdgeInsets {
         self.init(top: vertical, leading: horizontal, bottom: vertical, trailing: horizontal)
     }
     
-    public init(top: CGFloat, horizontal: CGFloat, bottom: CGFloat) {
+    public init(top: CGFloat, bottom: CGFloat, horizontal: CGFloat) {
         self.init(top: top, leading: horizontal, bottom: bottom, trailing: horizontal)
     }
     

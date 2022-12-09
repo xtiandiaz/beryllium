@@ -11,26 +11,8 @@ public final class InjectionContainer {
     
     public static let shared = InjectionContainer()
     
-    private enum Error: Swift.Error {
-        case unregisteredReference(type: String)
-    }
-    
-    private struct InjectableSource {
-        
-        var block: () -> Any
-        var tag: String?
-    }
-    
-    private struct Injectable {
-        
-        var instance: Any
-        var tag: String?
-    }
-    
-    private var injectables = [String: Injectable]()
-    private var sources = [String: InjectableSource]()
-    
-    private init() {
+    public func `default`<T>(_ block: @autoclosure @escaping () -> T) {
+        defaults["\(T.self)"] = InjectableSource(block: block, tag: nil)
     }
     
     public func install<T>(
@@ -201,6 +183,8 @@ public final class InjectionContainer {
         } else if let source = sources[key], let injectable = source.block() as? T {
             injectables[key] = Injectable(instance: injectable, tag: source.tag)
             return injectable
+        } else if let `default` = defaults[key], let injectable = `default`.block() as? T {
+            return injectable
         } else {
             throw Error.unregisteredReference(type: key)
         }
@@ -220,6 +204,31 @@ public final class InjectionContainer {
     
     public func removeAll() {
         injectables.removeAll()
+    }
+    
+    // MARK: - Private
+    
+    private enum Error: Swift.Error {
+        case unregisteredReference(type: String)
+    }
+    
+    private struct InjectableSource {
+        
+        var block: () -> Any
+        var tag: String?
+    }
+    
+    private struct Injectable {
+        
+        var instance: Any
+        var tag: String?
+    }
+    
+    private var injectables = [String: Injectable]()
+    private var sources = [String: InjectableSource]()
+    private var defaults = [String: InjectableSource]()
+    
+    private init() {
     }
     
     private func install<T>(_ block: @escaping () -> T, _ type: T.Type, _ tag: String?) {

@@ -9,3 +9,14 @@ import Foundation
 
 extension NSObject: Configurable {
 }
+
+extension NSObject {
+    
+    public static var className: String {
+        NSStringFromClass(Self.self)
+    }
+    
+    public var className: String {
+        NSStringFromClass(type(of: self))
+    }
+}
