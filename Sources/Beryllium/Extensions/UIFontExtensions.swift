@@ -15,6 +15,23 @@ extension UIFont.TextStyle {
         suiTextStyle.size
     }
     
+    public var weight: UIFont.Weight {
+        suiTextStyle.weight.uiWeight
+    }
+    
+    public var design: UIFontDescriptor.SystemDesign {
+        suiTextStyle.design.uiDesign
+    }
+    
+    public var symbolWeight: UIImage.SymbolWeight {
+        switch self {
+        case .largeTitle, .title1, .title2, .title3, .headline, .subheadline, .caption2:
+            return .bold
+        default:
+            return .regular
+        }
+    }
+    
     public var suiTextStyle: Font.TextStyle {
         switch self {
         case .largeTitle: return .largeTitle

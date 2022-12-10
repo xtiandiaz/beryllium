@@ -17,8 +17,12 @@ extension UIImage {
     ) -> UIImage {
         UIImage(systemName: systemName)!
             .withRenderingMode(.alwaysTemplate)
-            .withConfiguration(UIImage.SymbolConfiguration(textStyle: textStyle, scale: scale))
-            
+            .withConfiguration(
+                UIImage.SymbolConfiguration(
+                    pointSize: UIFont.preferredFont(forTextStyle: textStyle).pointSize,
+                    weight: textStyle.symbolWeight
+                )
+            )
     }
     
     public static func circle(withSize size: CGFloat, color: UIColor) -> UIImage? {

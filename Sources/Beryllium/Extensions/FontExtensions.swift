@@ -25,6 +25,24 @@ extension Font.TextStyle {
         @unknown default: return 17
         }
     }
+    
+    public var weight: Font.Weight {
+        switch self {
+        case .largeTitle, .title, .title2, .title3, .headline, .subheadline, .caption2:
+            return .bold
+        default:
+            return .regular
+        }
+    }
+    
+    public var design: Font.Design {
+        switch self {
+        case .largeTitle, .title, .title2, .title3, .headline, .subheadline, .caption2:
+            return .rounded
+        default:
+            return .default
+        }
+    }
 }
 
 extension Font.Weight {
@@ -41,6 +59,19 @@ extension Font.Weight {
         case .heavy: return .heavy
         case .black: return .black
         default: return .regular
+        }
+    }
+}
+
+extension Font.Design {
+    
+    public var uiDesign: UIFontDescriptor.SystemDesign {
+        switch self {
+        case .rounded: return .rounded
+        case .monospaced: return .monospaced
+        case .serif: return .serif
+        case .default: return .default
+        @unknown default: return .default
         }
     }
 }
