@@ -238,4 +238,12 @@ extension CGRect {
     public init(size: CGSize) {
         self.init(origin: .zero, size: size)
     }
+    
+    public func withSize(_ size: CGSize) -> CGRect {
+        CGRect(origin: origin, size: size)
+    }
+    
+    public func withWidth(_ width: CGFloat, height: CGFloat) -> CGRect {
+        CGRect(origin: origin, size: .init(width: width, height: height))
+    }
 }
