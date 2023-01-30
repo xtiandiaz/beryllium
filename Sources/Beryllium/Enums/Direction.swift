@@ -11,4 +11,13 @@ public enum Direction: Int, Equatable {
          right,
          down,
          left
+    
+    public var extendedDirection: ExtendedDirection {
+        switch self {
+        case .up: return .up
+        case .right: return .right
+        case .down: return .down
+        case .left: return .left
+        }
+    }
 }
