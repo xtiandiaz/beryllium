@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SnapKit
 import UIKit
 
 extension UIViewController {
@@ -28,18 +27,6 @@ extension UIViewController {
         
         addChild(child)
         child.didMove(toParent: self)
-    }
-    
-    public func addAndConstrainChildViewController(
-        _ child: UIViewController,
-        withFrame frame: CGRect? = nil,
-        _ makeConstraints: (ConstraintMaker) -> Void
-    ) {
-        addChildViewController(child, withFrame: frame)
-        
-        child.view.snp.makeConstraints {
-            makeConstraints($0)
-        }
     }
     
     public func removeFromParentViewController() {

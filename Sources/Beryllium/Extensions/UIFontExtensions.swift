@@ -9,6 +9,14 @@ import Foundation
 import SwiftUI
 import UIKit
 
+extension UIFont {
+    
+    public static func font(forTextStyle textStyle: UIFont.TextStyle) -> UIFont {
+        let metrics = UIFontMetrics(forTextStyle: textStyle)
+        return metrics.scaledFont(for: UIFont.systemFont(ofSize: textStyle.size, weight: textStyle.weight))
+    }
+}
+
 extension UIFont.TextStyle {
     
     public var size: CGFloat {

@@ -14,16 +14,55 @@ extension NSAttributedString {
         return NSMakeRange(0, length)
     }
     
-    public convenience init(image: UIImage, textStyle: UIFont.TextStyle) {
-        self.init(attachment: NSTextAttachment().configure {
-            $0.image = image
-            
-            let textSize = UIFont.preferredFont(forTextStyle: textStyle).pointSize
-            let imageSize = image.size
-            let yOffset = (textSize - imageSize.height) / 2 - 1
-            
-            $0.bounds = CGRect(origin: .init(y: yOffset), size: image.size)
-        })
+    public convenience init(
+        symbol: String,
+        textStyle: UIFont.TextStyle = .body
+    ) {
+        let image = UIImage.symbol(symbol, withTextStyle: textStyle)
+        
+        self.init(image: image)
+    }
+    
+    public convenience init(
+        string: String,
+        color: UIColor,
+        textStyle: UIFont.TextStyle = .body,
+        alignment: NSTextAlignment = .left
+    ) {
+        self.init(
+            string: string,
+            attributes: [
+                .foregroundColor: color,
+                .font: UIFont.font(forTextStyle: textStyle),
+                .paragraphStyle: NSMutableParagraphStyle().configure {
+                    $0.alignment = alignment
+                }
+            ]
+        )
+    }
+    
+    public convenience init(image: UIImage) {
+        self.init(attachment: NSTextAttachment(image: image))
+    }
+    
+    public func prependSymbol(
+        _ symbol: String?,
+        withTextStyle textStyle: UIFont.TextStyle
+    ) -> NSAttributedString {
+        guard let symbol else {
+            return self
+        }
+        
+        let attributes = self.attributes(at: 0, effectiveRange: nil)
+        let mutableString = NSMutableAttributedString(
+            attributedString: .init(symbol: symbol, textStyle: textStyle)
+        ).configure {
+            $0.append(.init(string: String(repeating: .nonbreakingSpace, count: 2)))
+            $0.append(self)
+            $0.addAttributes(attributes, range: fullRange)
+        }
+        
+        return mutableString
     }
 }
 

@@ -13,14 +13,15 @@ extension UIImage {
     public static func symbol(
         _ systemName: String,
         withTextStyle textStyle: UIFont.TextStyle,
-        scale: SymbolScale = .medium
+        scale: SymbolScale = .default
     ) -> UIImage {
         UIImage(systemName: systemName)!
             .withRenderingMode(.alwaysTemplate)
             .withConfiguration(
                 UIImage.SymbolConfiguration(
                     pointSize: UIFont.preferredFont(forTextStyle: textStyle).pointSize,
-                    weight: textStyle.symbolWeight
+                    weight: textStyle.symbolWeight,
+                    scale: scale
                 )
             )
     }

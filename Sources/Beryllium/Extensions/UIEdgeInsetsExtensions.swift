@@ -62,4 +62,24 @@ extension UIEdgeInsets {
             right: lhs.right + rhs.right
         )
     }
+    
+    public func withBottom(_ bottom: CGFloat) -> Self {
+        .init(top: top, left: left, bottom: bottom, right: right)
+    }
+    
+    public func withHorizontal(_ horizontal: CGFloat) -> Self {
+        .init(top: top, left: horizontal, bottom: bottom, right: horizontal)
+    }
+    
+    public func withHorizontal(_ horizontal: UIEdgeInsets) -> Self {
+        .init(top: top, left: horizontal.left, bottom: bottom, right: horizontal.right)
+    }
+    
+    public func withVertical(_ vertical: CGFloat) -> Self {
+        .init(top: vertical, left: left, bottom: vertical, right: right)
+    }
+    
+    public func withVertical(_ vertical: UIEdgeInsets) -> Self {
+        .init(top: vertical.top, left: left, bottom: vertical.bottom, right: right)
+    }
 }
