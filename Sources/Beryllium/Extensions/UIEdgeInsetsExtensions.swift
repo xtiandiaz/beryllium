@@ -63,6 +63,10 @@ extension UIEdgeInsets {
         )
     }
     
+    public static func +=(lhs: inout UIEdgeInsets, rhs: UIEdgeInsets) {
+        lhs = lhs + rhs
+    }
+    
     public func withBottom(_ bottom: CGFloat) -> Self {
         .init(top: top, left: left, bottom: bottom, right: right)
     }

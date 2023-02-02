@@ -42,6 +42,14 @@ extension UIView {
         UIView(cornerRadius: height / 2, backgroundColor: backgroundColor)
     }
     
+    public func addSubviews(_ subviews: [UIView]) {
+        subviews.forEach { addSubview($0) }
+    }
+    
+    public func addSubviews(_ subviews: UIView...) {
+        subviews.forEach { addSubview($0) }
+    }
+    
     public func addSubviews(_ subviews: UIView?...) {
         subviews.compactMap { $0 }.forEach { addSubview($0) }
     }
