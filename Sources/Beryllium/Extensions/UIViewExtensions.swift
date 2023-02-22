@@ -54,6 +54,11 @@ extension UIView {
         subviews.compactMap { $0 }.forEach { addSubview($0) }
     }
     
+    public func setCornerRadius(forHeight height: CGFloat) {
+        layer.cornerRadius = height / 2
+        layer.masksToBounds = true
+    }
+    
     public func dropShadow() {
         with(layer) {
             $0.masksToBounds = false
