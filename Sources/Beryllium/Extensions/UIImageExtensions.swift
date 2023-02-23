@@ -15,15 +15,15 @@ extension UIImage {
         withTextStyle textStyle: UIFont.TextStyle,
         scale: SymbolScale = .default
     ) -> UIImage {
-        UIImage(systemName: systemName)!
-            .withRenderingMode(.alwaysTemplate)
-            .withConfiguration(
-                UIImage.SymbolConfiguration(
-                    pointSize: UIFont.preferredFont(forTextStyle: textStyle).pointSize,
-                    weight: textStyle.symbolWeight,
-                    scale: scale
-                )
+        UIImage(
+            systemName: systemName,
+            withConfiguration: UIImage.SymbolConfiguration(
+                pointSize: UIFont.preferredFont(forTextStyle: textStyle).pointSize,
+                weight: textStyle.symbolWeight,
+                scale: scale
             )
+        )!
+        .withRenderingMode(.alwaysTemplate)
     }
     
     public static func circle(withSize size: CGFloat, color: UIColor) -> UIImage? {

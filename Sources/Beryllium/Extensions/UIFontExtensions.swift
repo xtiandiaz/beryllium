@@ -33,8 +33,10 @@ extension UIFont.TextStyle {
     
     public var symbolWeight: UIImage.SymbolWeight {
         switch self {
-        case .largeTitle, .title1, .title2, .title3, .headline, .subheadline, .caption2:
-            return .bold
+        case .largeTitle, .title1, .title2, .title3, .headline, .subheadline:
+            return .semibold
+        case .caption1, .caption2:
+            return .medium
         default:
             return .regular
         }

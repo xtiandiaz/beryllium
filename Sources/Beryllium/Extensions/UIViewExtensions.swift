@@ -23,23 +23,10 @@ extension UIView {
         intrinsicContentSize.height
     }
     
-    public convenience init(cornerRadius: CGFloat, backgroundColor: UIColor) {
-        self.init()
-        
-        self.backgroundColor = backgroundColor
-        
-        layer.cornerRadius = cornerRadius
-        layer.masksToBounds = true
-    }
-    
     public convenience init(backgroundColor: UIColor) {
         self.init()
         
         self.backgroundColor = backgroundColor
-    }
-    
-    public static func roundedView(withHeight height: CGFloat, backgroundColor: UIColor) -> UIView {
-        UIView(cornerRadius: height / 2, backgroundColor: backgroundColor)
     }
     
     public func addSubviews(_ subviews: [UIView]) {
@@ -54,9 +41,17 @@ extension UIView {
         subviews.compactMap { $0 }.forEach { addSubview($0) }
     }
     
-    public func setCornerRadius(forHeight height: CGFloat) {
-        layer.cornerRadius = height / 2
+    @discardableResult
+    public func setCornerRadius(_ radius: CGFloat) -> Self {
+        layer.cornerRadius = radius
         layer.masksToBounds = true
+        
+        return self
+    }
+    
+    @discardableResult
+    public func setCornerRadius(forHeight height: CGFloat) -> Self {
+        setCornerRadius(height / 2)
     }
     
     public func dropShadow() {
